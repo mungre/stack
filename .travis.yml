@@ -42,7 +42,7 @@ matrix:
     compiler: ": #stack 8.0.2 osx"
     os: osx
 
-  - env: BUILD=stack GHCVER=8.0.2 CABALVER=1.24 HLINT_OPTIONS="hlint src/; hlint src/ --cpp-define=WINDOWS=1; hlint test/ --cpp-simple"
+  - env: BUILD=stack GHCVER=8.0.2 CABALVER=1.24 HLINT_COMMANDS="hlint src/; hlint src/ --cpp-define=WINDOWS=1; hlint test/ --cpp-simple"
     addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
 
   - env: BUILD=stack GHCVER=8.2.1 CABALVER=1.24 STACK_BUILD_OPTIONS=--pedantic DISABLE_SDIST_BUILD=y
