@@ -30,9 +30,9 @@ matrix:
     compiler: ": #GHC 8.0.2"
     addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
 
-  - env: BUILD=stack GHCVER=8.0.2
+  - env: BUILD=stack GHCVER=8.0.2 CABALVER=1.24
     compiler: ": #stack 8.0.2"
-    addons: {apt: {packages: [ghc-8.0.2], sources: [hvr-ghc]}}
+    addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
 
   - env: BUILD=stack GHCVER=8.2.1 STACK_YAML=stack-nightly.yaml GHC_OPTIONS="-Werror -Wno-missing-home-modules"
     compiler: ": #stack 8.2.1"
@@ -42,11 +42,12 @@ matrix:
     compiler: ": #stack 8.0.2 osx"
     os: osx
 
-  - env: BUILD=stack HLINT_OPTIONS="hlint src/; hlint src/ --cpp-define=WINDOWS=1; hlint test/ --cpp-simple"
+  - env: BUILD=stack GHCVER=8.0.2 CABALVER=1.24 HLINT_OPTIONS="hlint src/; hlint src/ --cpp-define=WINDOWS=1; hlint test/ --cpp-simple"
+    addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
 
-  - env: BUILD=stack GHCVER=8.2.1 STACK_BUILD_OPTIONS=--pedantic
+  - env: BUILD=stack GHCVER=8.2.1 CABALVER=1.24 STACK_BUILD_OPTIONS=--pedantic
     compiler: ": #stack 8.2.1"
-    addons: {apt: {packages: [ghc-8.2.1], sources: [hvr-ghc]}}
+    addons: {apt: {packages: [cabal-install-1.24,ghc-8.2.1], sources: [hvr-ghc]}}
 
   allow_failures:
   - env: BUILD=stack
