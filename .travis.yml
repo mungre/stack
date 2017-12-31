@@ -6,7 +6,7 @@ env:
   # The commit id of packcheck.sh to use from
   # https://github.com/harendra-kumar/packcheck.  Used only when the script
   # does not exist in the package repo at the path specified by "PACKCHECK"
-  - PACKCHECK_COMMIT="c9d670c0e173080a6589c685e8c84e87435f688e"
+  - PACKCHECK_COMMIT="1b7ee7a1b2a91f3a1e2131b30597252ef4b5944c"
   - GHC_OPTIONS="-Werror"
   - STACKVER=1.6.1
   - STACK_UPGRADE=y
@@ -26,9 +26,9 @@ matrix:
   include:
 
   # FIXME: Removing because the build keeps timing out.
-  - env: BUILD=cabal CABALVER=1.24 GHCVER=8.0.2 CABAL_USE_STACK_SDIST=y SDIST_OPTIONS="--pvp-bounds both"
-    compiler: ": #GHC 8.0.2"
-    addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
+  #- env: BUILD=cabal CABALVER=1.24 GHCVER=8.0.2 CABAL_USE_STACK_SDIST=y SDIST_OPTIONS="--pvp-bounds both"
+  #  compiler: ": #GHC 8.0.2"
+  #  addons: {apt: {packages: [cabal-install-1.24,ghc-8.0.2], sources: [hvr-ghc]}}
 
   - env: BUILD=stack GHCVER=8.0.2 CABALVER=1.24 DISABLE_SDIST_BUILD=y
     compiler: ": #stack 8.0.2"
@@ -79,6 +79,7 @@ script:
 
     # If a custom stack-yaml is specified, replace the default with that
     if test -e "$STACK_YAML"; then rm -f stack.yaml && ln -sv $STACK_YAML stack.yaml; else true; fi
+    unset STACK_YAML
 
     # Get packcheck if needed
     CURL=$(which curl)
